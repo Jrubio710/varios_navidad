@@ -23,7 +23,6 @@ function store(Request $request)
     }else{
         $user->save();
         session(['user'=>$user]);    
-        return redirect('landing')-> with('message', 'ERROR!');
     }
     return redirect('/games');
 }
