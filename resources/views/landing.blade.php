@@ -17,11 +17,17 @@ $title = 'XMas Game';
         <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse"> XMAS GAME!!!</h1>
 
         <div id="app" class="bg-white text-black rounded-lg shadow-lg p-6 max-w-md mx-auto">
-            <form id="nameForm" name="nameForm" method="GET" action="{{ url('/check') }}" class="space-y-4">
+            <form id="nameForm" name="nameForm" method="POST" action="{{ url('store') }}" class="space-y-4">
                 @csrf
+                @if($errors->any()){
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline">{{ $errors->first() }}</span>
+                }
+                @endif
                 <label for="name" class="block text-lg font-semibold">Nombre:</label>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="text" name="name" id="name" value="" placeholder="{{ session('user_name') }}"
+                <input type="text" name="name" id="name" value="" placeholder="Ingresa tu nombre" 
                     autocomplete="on"
                     class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
 
@@ -34,13 +40,5 @@ $title = 'XMas Game';
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-<script>
-function checkName(){
-    $.ajax({
-    url:"/",
-    type:"POST",
-    data:$("#name").serialize(),success:function(result){console.log(result);
-    
-    }});}
-</script>
+
 </html>

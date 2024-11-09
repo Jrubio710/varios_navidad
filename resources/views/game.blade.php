@@ -7,6 +7,6 @@
     <title>Game</title>
 </head>
 <body>
-    <h1>{{$user->name}}</h1>
+    <h1>{{session('user')}}</h1>
 </body>
 </html>

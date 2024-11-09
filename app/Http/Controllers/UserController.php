@@ -12,19 +12,20 @@ function store(Request $request)
 {
     $request->validate([
         'name' => 'required',
-        'ip' => 'required',
     ]);
     
     $user = new User();
     $user->name = $request->name;
-    $user->ip = $request->ip;
-    if($user == User::where('ip_adress', $request->ip())->first()){
-        session(['user'=>$user]);     
+    $user->ip = $request->ip();
+    
+    if($user == User::where('ip','=',  $request->ip())){
+        session(['user'=>$user]);
     }else{
         $user->save();
         session(['user'=>$user]);    
+        return redirect('landing')-> with('message', 'ERROR!');
     }
-    return redirect()->route('games.store');
+    return redirect('/games');
 }
 
 }
