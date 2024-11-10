@@ -1,4 +1,3 @@
-<!-- resources/views/games/game.blade.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,6 +18,10 @@
                 <button class="play-button" id="{{ $game->id }}">Jugar</button>
             </div>
         @endforeach
+    </div>
+    <div>
+        <a href="{{ route('gameplaybueno') }}" id="back-button" class="button">Volver</a>
+
     </div>
 
 </body>

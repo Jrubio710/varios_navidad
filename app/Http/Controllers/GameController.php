@@ -17,12 +17,12 @@ class GameController
 
     public function play($id)
     {
-        $viewPath = 'games.gameplay' . $id;
-
+ 
+        $viewPath = 'games.gameplay' . $id; 
+    
         if (view()->exists($viewPath)) {
             return view($viewPath);
         } else {
-            
             abort(404, 'El juego solicitado no existe.');
         }
     }
