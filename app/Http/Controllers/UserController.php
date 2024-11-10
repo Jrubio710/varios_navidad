@@ -7,27 +7,7 @@ use App\Models\User;
 
 class UserController
 {
-    
-function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required',
-    ]);
-    
-    $user = new User();
-    $user->name = $request->name;
-    $user->ip = $request->ip();
-    
-    if($user == User::where('ip','=',  $request->ip())){
-        session(['user'=>$user]);
-    }else{
-        $user->save();
-        session(['user'=>$user]);    
-    }
-    return redirect('/games');
-}
-
-public function store1(Request $request)
+public function store(Request $request)
 {
     $request->validate([
         'name' => 'required|string|max:255',
@@ -48,7 +28,7 @@ public function store1(Request $request)
     }
 
     // Redirigir a la página principal de juegos
-    return redirect()->route('games.game');
+    return redirect('/games');
 }
 
 
