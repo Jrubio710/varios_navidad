@@ -27,4 +27,29 @@ function store(Request $request)
     return redirect('/games');
 }
 
+public function store1(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $existingUser = User::where('ip', $request->ip())->first();
+
+    if ($existingUser) {
+        session(['user' => $existingUser]);
+    } else {
+        $user = new User();
+        $user->name = $request->name;
+        $user->ip = $request->ip();
+        $user->save();
+
+        session(['user' => $user]); 
+        
+    }
+
+    // Redirigir a la página principal de juegos
+    return redirect()->route('games.game');
+}
+
+
 }

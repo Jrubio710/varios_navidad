@@ -14,16 +14,16 @@ $title = 'XMas Game';
 
 <body class="bg-gradient-to-r from-blue-900 via-purple-800 to-pink-700 min-h-screen flex items-center justify-center text-white">
     <div class="container mx-auto p-6 text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse"> XMAS GAME!!!</h1>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse"> XMAS GAMES!!!</h1>
 
         <div id="app" class="bg-white text-black rounded-lg shadow-lg p-6 max-w-md mx-auto">
-            <form id="nameForm" name="nameForm" method="POST" action="{{ url('store') }}" class="space-y-4">
+            <form id="nameForm" name="nameForm" method="POST" action="{{route('user.store')}}" method="POST" class="space-y-4">
                 @csrf
-                @if($errors->any()){
+                @if($errors->any())
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                     <strong class="font-bold">Error!</strong>
                     <span class="block sm:inline">{{ $errors->first() }}</span>
-                }
+                </div>
                 @endif
                 <label for="name" class="block text-lg font-semibold">Nombre:</label>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
