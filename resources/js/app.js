@@ -1,7 +1,12 @@
 function startGame(gameId) {
     alert("Iniciando el juego con ID: " + gameId);
-    
-    window.location.href = '/game/play'+gameId;
+
+        // Usa la ruta actual para construir la nueva URL
+        let baseUrl = window.location.origin + window.location.pathname;
+
+        // Navega a la ruta deseada concatenando el ID
+        window.location.href = baseUrl + '/gameplay/' + gameId;
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -9,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     playButtons.forEach(button => {
         button.addEventListener('click', function () {
             const gameId = this.getAttribute('id');
-            startGame(gameId); 
+            startGame(gameId);
         });
     });
 });
