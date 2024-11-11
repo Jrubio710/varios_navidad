@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Juego1</title>
-</head>
-<body>
-    <h1>Este es el juego 1</h1>
-</body>
-</html>
+@extends('games.layout')
+
+@section('title', 'Juego de Memoria')
+
+@section('content')
+<div class="game-container">
+    <!-- Aquí iría el código específico del juego de memoria -->
+    <x-game-container>
+        <p>Contenido del juego de memoria</p>
+    </x-game-container>
+</div>
+@endsection
