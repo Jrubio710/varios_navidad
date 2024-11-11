@@ -1,5 +1,5 @@
 function startGame(gameId) {
-    alert("Iniciando el juego con ID: " + gameId);
+    
 
         // Usa la ruta actual para construir la nueva URL
         let baseUrl = window.location.origin + window.location.pathname;

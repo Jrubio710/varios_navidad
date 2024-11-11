@@ -20,7 +20,7 @@
         @endforeach
     </div>
     <div>
-        <a href="{{ route('gameplaybueno') }}" id="back-button" class="button">Volver</a>
+    
 
     </div>
 
