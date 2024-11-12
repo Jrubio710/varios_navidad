@@ -8,4 +8,3 @@
     <p>Este es el juego de memoria</p>
 </div>
 @endsection
-@endsection
