@@ -1,9 +1,9 @@
 <header class="bg-gray-100 py-4 shadow-md">
     <div class="logo text-center">
-        <h1 class="text-2xl font-bold">Minijuegos</h1>
+        <h1 class="text-2xl font-bold text-black">Minijuegos</h1>
     </div>
 
-   
+
     <div id="game-carousel" class="carousel-container mt-4 relative">
         <div class="carousel-wrapper overflow-hidden flex justify-start space-x-4">
             @foreach($games as $game)
@@ -15,7 +15,7 @@
             @endforeach
         </div>
 
-       
+
         <div class="absolute top-1/2 left-0 transform -translate-y-1/2 px-4">
             <button class="prev bg-gray-600 text-white p-2 rounded-full">&#60;</button>
         </div>

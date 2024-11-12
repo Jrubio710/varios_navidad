@@ -5,8 +5,7 @@
 @section('content')
 <div class="game-container">
     <!-- Aquí iría el código específico del juego de memoria -->
-    <x-game-container>
-        <p>Contenido del juego de memoria</p>
-    </x-game-container>
+    <p>Este es el juego de memoria</p>
 </div>
+@endsection
 @endsection

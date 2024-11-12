@@ -23,8 +23,8 @@ public function store(Request $request)
         $user->ip = $request->ip();
         $user->save();
 
-        session(['user' => $user]); 
-        
+        session(['user' => $user]);
+
     }
 
     // Redirigir a la página principal de juegos

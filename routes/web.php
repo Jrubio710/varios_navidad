@@ -17,3 +17,5 @@ Route::get('/games', [GameController::class, 'show'])->name('games.game');
 Route::get('/games/gameplay/{id}', [GameController::class, 'play'])->name('games.play');
 
 Route::get('/game', function () {return view('games.gameplay1');})->name('gameplaybueno');
+
+
