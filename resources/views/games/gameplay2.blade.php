@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Este es el juego 2</h1>
+    
 </body>
 </html>
