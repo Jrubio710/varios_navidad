@@ -33,7 +33,7 @@
     </div>
 
     <!-- Footer -->
-    <x-footer class="mt-auto" /> <!-- Esto asegura que el footer siempre quede al final -->
+    <x-footer class="mt-auto " /> <!-- Esto asegura que el footer siempre quede al final -->
 
 </body>
 </html>
