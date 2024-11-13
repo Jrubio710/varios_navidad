@@ -28,7 +28,7 @@ class GrinchController
                     $board[$i][$j] = $color->setBlackColor();
                     continue;
                 }
-                $board[$i][$j] = $color->getRandomColor($size);
+                $board[$i][$j] = getRandomColor($size);
             }
         }
         session(['chances' => 10]);
@@ -78,6 +78,12 @@ class GrinchController
             "#DFFF00",
             "#00FF7F"
         ];
+        return $colors;
+    }
+    public function getRandomColor($colors, $size){
+
+        $randomColor = $colors[rand(0, count($colors) - 1)];
+        return $randomColor;
     }
     public function play()
     {
