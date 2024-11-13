@@ -1,42 +1,35 @@
-function startGame(gameId) {
-    let baseUrl = window.location.origin + window.location.pathname;
-    window.location.href = baseUrl + '/gameplay/' + gameId;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleAsideButton = document.getElementById('toggleAsideButton');
+    const aside = document.getElementById('aside');
+    const showAsideButton = document.getElementById('showAsideButton');
+
+    // Asegurarse de que el aside sea visible inicialmente (sin translate-x)
+    aside.classList.remove('translate-x-[-100%]');
+    showAsideButton.classList.add('hidden');  // El botón de mostrar está oculto al principio
+
+    if (toggleAsideButton && aside && showAsideButton) {
+        // Acción para ocultar el aside (deslizarlo fuera de la pantalla)
+        toggleAsideButton.addEventListener('click', () => {
+            aside.classList.add('translate-x-[-100%]');  // Mover el aside fuera de la pantalla
+            showAsideButton.classList.remove('hidden');  // Mostrar el botón para mostrar el aside
+        });
+
+        // Acción para mostrar el aside (deslizarlo de nuevo dentro de la pantalla)
+        showAsideButton.addEventListener('click', () => {
+            aside.classList.remove('translate-x-[-100%]');  // Mover el aside dentro de la pantalla
+            showAsideButton.classList.add('hidden');  // Ocultar el botón de mostrar el aside
+        });
+    }
+});
+
+
 function cambiarNumeroEnUrl(gameId) {
     let url = window.location.origin + window.location.pathname;
     window.location.href = url.replace(/\/(\d+)(\/?)$/, `/${gameId}$2`);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const playButtons = document.querySelectorAll('.play-button');
-    playButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const gameId = this.getAttribute('data-id');
-            cambiarNumeroEnUrl(gameId);
-            //hay que llamar a la ruta
-        });
-    });
 
-    const prevButton = document.querySelector('.prev');
-    const nextButton = document.querySelector('.next');
-    const carouselWrapper = document.querySelector('.carousel-wrapper');
-    const slideWidth = document.querySelector('.carousel-slide').offsetWidth;
-
-    let currentIndex = 0;
-
-    prevButton.addEventListener('click', function () {
-        if (currentIndex > 0) {
-            currentIndex--;
-            carouselWrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-        }
-    });
-
-    nextButton.addEventListener('click', function () {
-        if (currentIndex < carouselWrapper.children.length - 1) {
-            currentIndex++;
-            carouselWrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-        }
-    });
-});
-
-
+function startGame(gameId) {
+    let baseUrl = window.location.origin + window.location.pathname;
+    window.location.href = baseUrl + '/gameplay/' + gameId;
+}

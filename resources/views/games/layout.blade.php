@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minijuegos</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     <!-- Header -->
@@ -14,7 +13,7 @@
     <!-- Contenido principal de la página -->
     <div class="main-layout">
         <!-- Aside (Barra lateral) -->
-        <x-aside />
+        <x-aside/>
 
         <!-- Contenido de los juegos y el leaderboard -->
         <div class="content">
@@ -23,7 +22,6 @@
 
             <!-- Contenedor de Juego Dinámico -->
             <x-game-container>
-                <!-- Aquí se inserta el contenido específico de cada juego -->
                 @yield('game-content')
             </x-game-container>
         </div>
@@ -31,5 +29,6 @@
 
     <!-- Footer -->
     <x-footer />
+
 </body>
 </html>

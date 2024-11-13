@@ -4,7 +4,7 @@
 
 @section('game-content')
     <x-aside />
-    <div class="game-container">
-        <p>Este es el juego del Grinch</p>
+    <div class="content">
+        <p>Este es 4</p>
     </div>
 @endsection
