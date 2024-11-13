@@ -17,7 +17,8 @@ title{
 }
 
 .carousel-slide {
-    width: 15rem; /* Ancho más pequeño */
+    width: 5rem; /* Ancho más pequeño */
+    height: 5rem; /* Altura más pequeña */
     flex-shrink: 0;
     text-align: center;
 }
