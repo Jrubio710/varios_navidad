@@ -8,3 +8,6 @@
     <p>Este es el juego de memoria</p>
 </div>
 @endsection
+@php
+    app('App\Http\Controllers\GrinchController')->index();
+@endphp

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class GrinchController
 {
+    public function index(){
+        $this->createBoard();
+    }
     public function show()
     {
         //verificar si el usuario está en la sesión y devolver la vista
@@ -14,21 +17,18 @@ class GrinchController
     public function createBoard($size = 4)
     {
         $grinchController = new GrinchController();
+        $color = $this->colors($size);
 
         if ($size < 3) {
             $size = 3;
         }
         $grinch = $grinchController->firstPositionGrinch($size);
-        $board = array();
+        $board = [];
 
         for ($i = 0; $i < $size; $i++) {
-            $board[$i] = array();
+            $board[$i] = [];
             for ($j = 0; $j < $size; $j++) {
-                if ($grinch['x'] == $j && $grinch['y'] == $i) {
-                    $board[$i][$j] = $color->setBlackColor();
-                    continue;
-                }
-                $board[$i][$j] = getRandomColor($size);
+                $board[$i][$j] = $this->getRandomColor($color);
             }
         }
         session(['chances' => 10]);
@@ -44,9 +44,9 @@ class GrinchController
         session(['x' => $grinchPosition_x]);
         session(['y' => $grinchPosition_y]);
 
-        return array('x' => $grinchPosition_x, 'y' => $grinchPosition_y);
+        return ['x' => $grinchPosition_x, 'y' => $grinchPosition_y];
     }
-    public function checkCell(Request $request) {
+    public function checkCell() {
         //verifica si el mounstro está en la celda clickada
 
 
@@ -55,7 +55,7 @@ class GrinchController
             'message' => 'El mounstro está en la celda clickada'
         ]);
     }
-    public function colors(){
+    public function colors($size = 3){
         $colors = [
             "#39FF14",
             "#FF073A",
@@ -78,9 +78,11 @@ class GrinchController
             "#DFFF00",
             "#00FF7F"
         ];
+
+        $colors = array_rand($colors, $size);
         return $colors;
     }
-    public function getRandomColor($colors, $size){
+    public function getRandomColor($colors){
 
         $randomColor = $colors[rand(0, count($colors) - 1)];
         return $randomColor;
@@ -90,7 +92,7 @@ class GrinchController
         return view('games.grinchplay');
     }
 
-    public function saveScore(Request $request) {
+    public function saveScore() {
         //guardar el puntaje del usuario en la base de datos
 
         return response()->json([

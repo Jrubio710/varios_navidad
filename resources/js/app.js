@@ -2,13 +2,18 @@ function startGame(gameId) {
     let baseUrl = window.location.origin + window.location.pathname;
     window.location.href = baseUrl + '/gameplay/' + gameId;
 }
+function cambiarNumeroEnUrl(gameId) {
+    let url = window.location.origin + window.location.pathname;
+    window.location.href = url.replace(/\/(\d+)(\/?)$/, `/${gameId}$2`);
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const playButtons = document.querySelectorAll('.play-button');
     playButtons.forEach(button => {
         button.addEventListener('click', function () {
             const gameId = this.getAttribute('data-id');
-            startGame(gameId);
+            cambiarNumeroEnUrl(gameId);
+            //hay que llamar a la ruta
         });
     });
 

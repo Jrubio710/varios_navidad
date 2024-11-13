@@ -8,7 +8,7 @@
 <body>
     <h1>Escoge un Juego Navideño</h1>
 
-   
+
     <div class="games-container">
         @foreach($games as $game)
             <div class="game-card">
