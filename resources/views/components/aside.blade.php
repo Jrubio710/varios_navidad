@@ -1,6 +1,6 @@
 <div>
     <!-- Aside con juegos (oculto por defecto con -translate-x-full) -->
-    <div id="aside" class="bg-blue-500 text-white p-6 fixed top-20 left-0 w-80 h-screen transform -translate-x-full transition-all duration-500 ease-in-out overflow-y-auto z-20 flex flex-col">
+    <div id="aside" class="bg-blue-500 text-white p-6 fixed top-20 left-0 w-80 h-full transform -translate-x-full transition-all duration-500 ease-in-out overflow-y-auto z-20 flex flex-col">
         
         <!-- Botón para ocultar el aside -->
         <button id="toggleAsideButton" class="bg-blue-700 hover:bg-blue-600 text-white px-6 py-3 mb-6 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 z-30">
