@@ -10,7 +10,7 @@
         <div class="games-container flex-grow overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500 scrollbar-track-gray-200 pb-8">
             @foreach($games as $game)
                 <div class="game-card bg-white text-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-all p-4 mb-4 max-h-[350px]">
-                    <a href="{{ route('games.show', $game->id) }}">
+                    <a href="{{ route('games.play', $game->id) }}">
                         <img src="{{ asset('img/juego' . $game->id . '.png') }}" alt="{{ $game->name }}" class="w-full h-32 object-cover rounded-md my-4">
                     </a>
                     <p class="text-center text-gray-600 mb-4 text-sm truncate" style="max-height: 60px; overflow: hidden;">{{ $game->description }}</p>

@@ -60,7 +60,7 @@
                     <p class="text-center text-gray-600 mb-6">{{ $game->description }}</p>
                     
                     <div class="flex-grow"></div> 
-                    <button class="play-button bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 px-8 rounded-full hover:bg-gradient-to-l hover:from-blue-500 hover:to-teal-500 transition-all duration-300 transform hover:scale-105 mx-auto">
+                    <button class="play-button bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 px-8 rounded-full hover:bg-gradient-to-l hover:from-blue-500 hover:to-teal-500 transition-all duration-300 transform hover:scale-105 mx-auto" id="{{$game->id}}" onclick="window.location.href='{{ route('games.play', $game->id) }}'">
                         Jugar
                     </button>
                 </div>
@@ -69,6 +69,8 @@
     </div>
 
     <script>
+
+
         
         particlesJS("particles-js", {
             "particles": {
