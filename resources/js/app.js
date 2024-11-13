@@ -3,24 +3,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const aside = document.getElementById('aside');
     const showAsideButton = document.getElementById('showAsideButton');
 
-    // Asegurarse de que el aside sea visible inicialmente (sin translate-x)
-    aside.classList.remove('translate-x-[-100%]');
-    showAsideButton.classList.add('hidden');  // El botón de mostrar está oculto al principio
+    // Mostrar el aside inicialmente y ocultar el botón "Mostrar Juegos"
+    aside.classList.remove('-translate-x-full');
+    showAsideButton.classList.add('hidden');  // Ocultar el botón de mostrar al principio
 
     if (toggleAsideButton && aside && showAsideButton) {
         // Acción para ocultar el aside (deslizarlo fuera de la pantalla)
         toggleAsideButton.addEventListener('click', () => {
-            aside.classList.add('translate-x-[-100%]');  // Mover el aside fuera de la pantalla
-            showAsideButton.classList.remove('hidden');  // Mostrar el botón para mostrar el aside
+            aside.classList.add('-translate-x-full');        // Oculta el aside
+            toggleAsideButton.classList.add('hidden');        // Oculta el botón "Ocultar Juegos"
+            showAsideButton.classList.remove('hidden');       // Muestra el botón para mostrar el aside
         });
 
         // Acción para mostrar el aside (deslizarlo de nuevo dentro de la pantalla)
         showAsideButton.addEventListener('click', () => {
-            aside.classList.remove('translate-x-[-100%]');  // Mover el aside dentro de la pantalla
-            showAsideButton.classList.add('hidden');  // Ocultar el botón de mostrar el aside
+            aside.classList.remove('-translate-x-full');      // Muestra el aside
+            toggleAsideButton.classList.remove('hidden');     // Muestra el botón "Ocultar Juegos"
+            showAsideButton.classList.add('hidden');          // Oculta el botón para mostrar el aside
         });
     }
 });
+
 
 
 function cambiarNumeroEnUrl(gameId) {
