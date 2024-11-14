@@ -21,7 +21,7 @@
         </div>
 
         <!-- Contenido de los juegos y el leaderboard -->
-        <div class="flex-grow pl-80 p-4 pb-20"> <!-- Añadimos un padding a la izquierda para evitar que el contenido se solape con el aside y padding-bottom para evitar que se solape con el footer -->
+        <div class="flex-grow w-full h-full p-0"> 
             <!-- Leaderboard -->
             <x-leaderboard />
 
