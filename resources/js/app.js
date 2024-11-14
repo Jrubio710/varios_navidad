@@ -36,3 +36,4 @@ function startGame(gameId) {
     let baseUrl = window.location.origin + window.location.pathname;
     window.location.href = baseUrl + '/gameplay/' + gameId;
 }
+
