@@ -10,10 +10,11 @@ let movimientos = 0;
 let tiempo = 60;
 let juegoActivo = false; // Estado del juego
 let bloqueado = false; // Para evitar clics mientras las cartas se comparan
+let contadorInterval; // Variable para almacenar el intervalo del cronómetro
 
 // Eventos
-startButton.addEventListener('click', iniciarJuego());
-restartButton.addEventListener('click', reiniciarJuego());
+startButton.addEventListener('click', iniciarJuego);
+restartButton.addEventListener('click', reiniciarJuego);
 
 // Función para iniciar el juego
 function iniciarJuego() {
@@ -114,11 +115,11 @@ function destapar(carta) {
 
 // Función para iniciar el cronómetro
 function cronometro() {
-    let contador = setInterval(() => {
+    contadorInterval = setInterval(() => { // Usar la variable global
         tiempo--;
         tiempoRestante.innerHTML = tiempo; // Actualizar el tiempo restante
         if (tiempo <= 0) {
-            clearInterval(contador);
+            clearInterval(contadorInterval); // Detener el cronómetro cuando el tiempo llegue a cero
             Swal.fire({
                 title: '¡Se acabó el tiempo! 😱',
                 text: '¡Ups! El tiempo ha volado. ¡Intenta de nuevo!',
@@ -134,6 +135,11 @@ function cronometro() {
 
 // Función para reiniciar el juego
 function reiniciarJuego() {
+    // Detener el cronómetro si está activo
+    if (contadorInterval) {
+        clearInterval(contadorInterval);
+    }
+    
     // Mostrar alerta de SweetAlert
     Swal.fire({
         title: '¡Listo para comenzar!',
@@ -146,6 +152,9 @@ function reiniciarJuego() {
         cancelButtonColor: '#d33',
     }).then((result) => {
         if (result.isConfirmed) {
+            // Detener el cronómetro si el usuario decide reiniciar
+            clearInterval(contadorInterval);
+
             // Deshabilitar todas las cartas
             cards.forEach(card => {
                 card.disabled = true;
@@ -168,6 +177,9 @@ function reiniciarJuego() {
 
             // Cambiar el estado del juego a inactivo
             juegoActivo = false;
+        } else {
+            // Si el usuario cancela, no detener el cronómetro, solo continuar
+            cronometro();
         }
     });
 }
