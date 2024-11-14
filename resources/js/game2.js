@@ -28,8 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach((card) => {
         card.addEventListener('click', () => checkGrinch(card.id));
     });
+
+    // Agregar el evento para el botón de información
+    const infoButton = document.querySelector('.info');  // Selecciona el botón con clase 'info'
+    if (infoButton) {
+        infoButton.addEventListener('click', infoJuego);
+    }
 });
 
+// Función para verificar si se encontró al Grinch
 function checkGrinch(num) {
     console.log("Carta seleccionada:", num);
     const grinchPosition = sessionStorage.getItem('grinchPosition');
@@ -62,6 +69,7 @@ function checkGrinch(num) {
     }
 }
 
+// Función para iniciar el juego
 function startGame() {
     const startButton = document.querySelector('#iniciar');
     startButton.disabled = true;
@@ -89,6 +97,7 @@ function startGame() {
     console.log("Grinch está en la posición:", grinchPosition);
 }
 
+// Función para mover al Grinch
 function moveGrinch() {
     const size = 4;
     let currentPosition = sessionStorage.getItem('grinchPosition');
@@ -117,6 +126,7 @@ function moveGrinch() {
     sessionStorage.setItem('grinchPosition', `${newX}${newY}`);
 }
 
+// Función para reiniciar el juego
 function reiniciarJuego() {
     const startButton = document.querySelector('#iniciar');
     startButton.disabled = false;
@@ -133,6 +143,7 @@ function reiniciarJuego() {
     console.log("Juego reiniciado.");
 }
 
+// Función para el cronómetro
 function cronometro() {
     contadorInterval = setInterval(() => {
         tiempo--;
@@ -152,7 +163,36 @@ function cronometro() {
     }, 1000);
 }
 
+// Función para mostrar el rastro de los colores
 function rastro(color) {
     const rastroAside = document.getElementById('rastro');
     rastroAside.innerHTML += `<div class="w-8 h-8 rounded-full" style="background-color: ${color};"></div>`;
+}
+
+// Función para mostrar las instrucciones del juego
+function infoJuego() {
+    // Detener el cronómetro temporalmente si está activo
+    if (juegoActivo && contadorInterval) {
+        clearInterval(contadorInterval); // Pausar el cronómetro
+    }
+
+    Swal.fire({
+        title: '<h2 class="text-xl font-bold text-blue-600 mb-4">Instrucciones</h2>',
+        html: `
+            <div class="text-left">
+                <p class="mb-2">¡Bienvenido al juego de encontrar al Grinch! 🎄</p>
+                <p class="mb-2">El objetivo del juego es encontrar al Grinch en el menor número de movimientos posibles.</p>
+                <p class="mb-2">Cada tarjeta tiene un color diferente, pero solo una de ellas es el Grinch.</p>
+                <p class="mb-2">Haz clic en una tarjeta para revelar su color y descubrir si es el Grinch.</p>
+                <p class="mb-2">¡Buena suerte y diviértete!</p>
+        `,
+        icon: 'info',
+        confirmButtonText: '¡Entendido!',
+        confirmButtonColor: '#4CAF50',
+    }).then(() => {
+        // Reanudar el cronómetro si el juego sigue activo
+        if (juegoActivo) {
+            cronometro(); // Reiniciar el cronómetro
+        }
+    });
 }
