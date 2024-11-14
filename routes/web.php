@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GrinchController;
 
 // Ruta a la página de inicio
 Route::get('/', function () { return view('games.landing'); })->name('landing');
@@ -18,3 +19,6 @@ Route::get('/games/{id}', [GameController::class, 'showGame'])->name('games.show
 
 // Ruta para jugar un juego específico
 Route::get('/games/gameplay/{id}', [GameController::class, 'play'])->name('games.play');
+
+// Ruta para el grinch
+Route::get('/games/grinch', [GrinchController::class, 'grinch'])->name('games.grinch');

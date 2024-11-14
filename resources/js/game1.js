@@ -12,8 +12,8 @@ let juegoActivo = false; // Estado del juego
 let bloqueado = false; // Para evitar clics mientras las cartas se comparan
 
 // Eventos
-startButton.addEventListener('click', iniciarJuego);
-restartButton.addEventListener('click', reiniciarJuego);
+startButton.addEventListener('click', iniciarJuego());
+restartButton.addEventListener('click', reiniciarJuego());
 
 // Función para iniciar el juego
 function iniciarJuego() {
