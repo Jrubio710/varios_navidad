@@ -36,7 +36,11 @@
             <div class="flex justify-center gap-4 mt-6">
                 <button onclick="iniciarJuego()" id="iniciar" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition start">Iniciar Juego</button>
                 <button onclick="reiniciarJuego()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition restart">Reiniciar Juego</button>
-            </div>
+                <button onclick="infoJuego()" class="bg-blue-100 hover:bg-blue-200 text-blue-800 font-medium py-2 px-4 rounded-lg transition flex items-center gap-2 shadow info">
+                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold">i</span>
+                Indicaciones
+                </button>
+             </div>
         </section>
     </main>
 </div>

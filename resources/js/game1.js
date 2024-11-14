@@ -2,6 +2,7 @@
 const cards = document.querySelectorAll('.card');
 const startButton = document.querySelector('.start');
 const restartButton = document.querySelector('.restart');
+const infoButton = document.querySelector('.info');
 const tiempoRestante = document.getElementById('tiempo_restante');
 
 let cartasDestapadas = [];
@@ -15,6 +16,7 @@ let contadorInterval; // Variable para almacenar el intervalo del cronómetro
 // Eventos
 startButton.addEventListener('click', iniciarJuego);
 restartButton.addEventListener('click', reiniciarJuego);
+infoButton.addEventListener('click', infoJuego);
 
 // Función para iniciar el juego
 function iniciarJuego() {
@@ -180,6 +182,42 @@ function reiniciarJuego() {
         } else {
             // Si el usuario cancela, no detener el cronómetro, solo continuar
             cronometro();
+        }
+    });
+}
+
+// Función para mostrar las instrucciones del juego
+function infoJuego() {
+    // Detener el cronómetro temporalmente si está activo
+    if (juegoActivo && contadorInterval) {
+        clearInterval(contadorInterval); // Pausar el cronómetro
+    }
+
+    Swal.fire({
+        title: '<h2 class="text-xl font-bold text-blue-600 mb-4">Instrucciones</h2>',
+        html: `
+            <div class="text-left">
+                <p class="text-gray-700 leading-relaxed mb-2">
+                    <strong>Objetivo:</strong> Encuentra todas las parejas de cartas iguales.
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-2">
+                    Para jugar, simplemente haz clic en las cartas para destaparlas y encontrar los pares.
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-2">
+                    Si las cartas coinciden, se quedarán visibles. Si no coinciden, se ocultarán nuevamente.
+                </p>
+                <p class="text-gray-700 font-semibold leading-relaxed">
+                    ¡Buena suerte y diviértete!
+                </p>
+            </div>
+        `,
+        icon: 'info',
+        confirmButtonText: '¡Entendido!',
+        confirmButtonColor: '#4CAF50',
+    }).then(() => {
+        // Reanudar el cronómetro si el juego sigue activo
+        if (juegoActivo) {
+            cronometro(); // Reiniciar el cronómetro
         }
     });
 }
