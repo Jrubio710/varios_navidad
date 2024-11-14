@@ -47,16 +47,6 @@ function checkGrinch(num) {
             text: '¡Sigue buscando!'
         });
         movimientos++;
-        const grinchElement = document.getElementById(grinchPosition);
-
-        // Verificar si el elemento existe antes de obtener su estilo
-        if (grinchElement) {
-            const color = window.getComputedStyle(grinchElement).backgroundColor;
-            rastro(color);
-        } else {
-            console.error("El elemento con ID 'card" + grinchPosition + "' no se encontró en el DOM.");
-        }
-
         document.getElementById('contador_movimientos').innerText = movimientos;
         moveGrinch();
     }
@@ -81,6 +71,9 @@ function startGame() {
         const color = colors[random(0, colors.length - 1)];
         card.style.backgroundColor = color;
         card.disabled = false;  // Habilita el botón para permitir clics
+        if (card.id === grinchPosition) {
+            card.style.backgroundColor = 'black';
+        }
     });
     cronometro();
 
@@ -112,6 +105,10 @@ function moveGrinch() {
             ok = false;
         }
     } while (ok);
+
+    // Actualizar visualmente la posición del Grinch
+    document.getElementById(`${x}${y}`).style.backgroundColor = colors[random(0, colors.length - 1)]; // Color anterior
+    document.getElementById(`${newX}${newY}`).style.backgroundColor = 'black'; // Nueva posición del Grinch
 
     // Actualizar la nueva posición en sessionStorage
     sessionStorage.setItem('grinchPosition', `${newX}${newY}`);
@@ -150,9 +147,4 @@ function cronometro() {
             });
         }
     }, 1000);
-}
-
-function rastro(color) {
-    const rastroAside = document.getElementById('rastro');
-    rastroAside.innerHTML += `<div class="w-8 h-8 rounded-full" style="background-color: ${color};"></div>`;
 }

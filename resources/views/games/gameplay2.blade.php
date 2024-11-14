@@ -26,7 +26,6 @@
                 @endfor
             </table>
         </section>
-        
         <section class="section2 mt-10">
             <div class="score grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <h2 class="tiempo_restante text-lg font-semibold text-gray-800">Tiempo: <span id="tiempo_restante">60</span> segundos</h2>
@@ -39,4 +38,5 @@
         </section>
     </main>
 </div>
+<div id="rastro"></div>
 @endsection
