@@ -1,10 +1,13 @@
 // Variables
+const gameID = 2;
 const tiempoRestante = document.getElementById('tiempo_restante');
 const colors = [
     "#39FF14", // Neon Green
     "#FF6EC7", // Hot Pink
     "#01F9C6", // Turquoise
     "#F4F92A", // Lemon Yellow
+    "#FF0000", // Red
+    "#FFA500", // Orange
 ];
 let tiempo = 60;
 let juegoActivo = false; // Estado del juego
@@ -18,6 +21,10 @@ function random(min, max) {
 
 // Evento DOMContentLoaded para inicializar el juego y los eventos
 document.addEventListener('DOMContentLoaded', () => {
+    const reiniciarButton = document.querySelector('#reiniciar');
+    if (reiniciarButton) {
+        reiniciarButton.addEventListener('click', reiniciarJuego);
+    }
     const startButton = document.querySelector('#iniciar');
     if (startButton) {
         startButton.addEventListener('click', startGame);
@@ -128,20 +135,39 @@ function moveGrinch() {
 
 // Función para reiniciar el juego
 function reiniciarJuego() {
+    // Reiniciar el tiempo
+    tiempo = 60;
+    tiempoRestante.innerHTML = tiempo;
+
+    // Detener el cronómetro si está activo
+    clearInterval(contadorInterval);
+
+    // Rehabilitar el botón de inicio
     const startButton = document.querySelector('#iniciar');
     startButton.disabled = false;
     startButton.classList.remove('bg-gray-400', 'opacity-50');
     startButton.classList.add('bg-green-500', 'hover:bg-green-600');
 
+    // Limpiar los movimientos
+    movimientos = 0;
+    document.getElementById('contador_movimientos').innerText = movimientos;
+
+    // Eliminar el rastro de las bolas de colores
+    const rastroAside = document.getElementById('rastro');
+    rastroAside.innerHTML = ''; // Esto limpia todo el contenido del rastro
+
+    // Deshabilitar las cartas y limpiar su fondo
     const cards = document.querySelectorAll('.card');
     cards.forEach((card) => {
-        card.style.backgroundColor = 'bg-blue-200';
-        card.disabled = true;
+        card.style.backgroundColor = ''; // Limpiar color de fondo
+        card.disabled = true;  // Deshabilitar cartas
     });
 
+    // Eliminar la posición del Grinch de sessionStorage
     sessionStorage.removeItem('grinchPosition');
     console.log("Juego reiniciado.");
 }
+
 
 // Función para el cronómetro
 function cronometro() {
@@ -164,10 +190,25 @@ function cronometro() {
 }
 
 // Función para mostrar el rastro de los colores
-function rastro(color) {
-    const rastroAside = document.getElementById('rastro');
-    rastroAside.innerHTML += `<div class="w-8 h-8 rounded-full" style="background-color: ${color};"></div>`;
-}
+    function rastro2(color) {
+        const rastroAside = document.getElementById('rastro');
+        rastroAside.innerHTML += `<div class="w-8 h-8 rounded-full" style="background-color: ${color};"></div>`;
+    }
+
+    function rastro(color) {
+        const rastroAside = document.getElementById('rastro');
+        const bola = document.createElement('div');
+
+        // Agregar clases y estilos a la bola
+        bola.className = 'w-8 h-8 rounded-full shadow-md transition-transform transform hover:scale-110';
+        bola.style.backgroundColor = color;
+        bola.style.boxShadow = `0 0 5px ${color}`;
+
+        // Agregar la bola al div #rastro
+        rastroAside.appendChild(bola);
+        rastroAside.scrollTop = rastroAside.scrollHeight;  // Desplazar la barra de desplazamiento al final
+    }
+
 
 // Función para mostrar las instrucciones del juego
 function infoJuego() {
@@ -195,5 +236,47 @@ function infoJuego() {
         if (juegoActivo) {
             cronometro(); // Reiniciar el cronómetro
         }
+    });
+}
+
+function score(){
+    const score = movimientos;
+    const tiempo = 60 - tiempo;
+    const user_id = document.getElementById('user_id').value;
+
+    fetch('/score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            score: score,
+            tiempo: tiempo,
+            user_id: user_id,
+            game_id: gameID,
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        Swal.fire({
+            title: '¡Felicidades!',
+            text: 'Tu puntuación ha sido guardada con éxito.',
+            icon: 'success',
+            confirmButtonText: '¡OK!',
+            confirmButtonColor: '#4CAF50',
+        }).then(() => {
+            reiniciarJuego();
+        });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        Swal.fire({
+            title: '¡Ups!',
+            text: 'Ha ocurrido un error al guardar tu puntuación. Inténtalo de nuevo.',
+            icon: 'error',
+            confirmButtonText: '¡OK!',
+            confirmButtonColor: '#4CAF50',
+        });
     });
 }
