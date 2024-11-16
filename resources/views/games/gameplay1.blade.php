@@ -1,6 +1,5 @@
 @extends('games.layout')
 @vite(['resources/js/game1.js'])
-
 @section('title', 'Juego de Memoria')
 
 @section('game-content')

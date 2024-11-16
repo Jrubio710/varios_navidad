@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GrinchController;
+use App\Http\Controllers\ScoreController;
 
 // Ruta a la página de inicio
 Route::get('/', function () { return view('games.landing'); })->name('landing');
@@ -22,3 +23,7 @@ Route::get('/games/gameplay/{id}', [GameController::class, 'play'])->name('games
 
 // Ruta para el grinch
 Route::get('/games/grinch', [GrinchController::class, 'grinch'])->name('games.grinch');
+
+// Ruta para guardar la puntuación
+Route::post('/guardar-puntuacion', [ScoreController::class, 'guardarPuntuacion']);
+
