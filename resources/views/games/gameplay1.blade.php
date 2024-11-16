@@ -4,6 +4,7 @@
 @section('title', 'Juego de Memoria')
 
 @section('game-content')
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="content flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 to-blue-400 p-8">
     <main class="w-full max-w-3xl bg-white rounded-lg shadow-xl p-6 md:p-10 text-center">
@@ -32,6 +33,12 @@
                 <h2 class="aciertos text-lg font-semibold text-gray-800">Aciertos: <span id="contador_aciertos">0</span></h2>
                 <h2 class="tiempo_restante text-lg font-semibold text-gray-800">Tiempo: <span id="tiempo_restante">60</span> segundos</h2>
                 <h2 class="movimientos text-lg font-semibold text-gray-800">Movimientos: <span id="contador_movimientos">0</span></h2>
+            </div>
+            <div class="puntuacion flex justify-center mt-6">
+                <div class="bg-blue-100 text-blue-800 font-bold py-4 px-6 rounded-lg shadow-lg text-lg flex items-center gap-4">
+                    <span class="text-blue-500 material-icons text-2xl">star</span>
+                    <h2>Puntuación: <span id="contador_puntos">0</span> puntos</h2>
+                </div>
             </div>
             <div class="flex justify-center gap-4 mt-6">
                 <button onclick="iniciarJuego()" id="iniciar" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition start">Iniciar Juego</button>
