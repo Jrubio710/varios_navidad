@@ -137,37 +137,11 @@ function cronometro() {
 
 // Función para reiniciar el juego
 function reiniciarJuego() {
-    // Detener el cronómetro si está activo
-    if (contadorInterval) {
-        clearInterval(contadorInterval);
-    }
     
-    // Mostrar alerta de SweetAlert
-    Swal.fire({
-        title: '¡Listo para comenzar!',
-        text: '¿Estás preparado para reiniciar el juego?',
-        icon: 'info',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, reiniciar',
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#4CAF50',
-        cancelButtonColor: '#d33',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Detener el cronómetro si el usuario decide reiniciar
-            clearInterval(contadorInterval);
-
-            // Deshabilitar todas las cartas
-            cards.forEach(card => {
-                card.disabled = true;
-                card.innerText = '';
-                card.style.backgroundColor = 'blue';
-            });
-
             // Habilitar el botón "Iniciar" para que se pueda usar de nuevo
             startButton.disabled = false;
             startButton.classList.remove('bg-gray-400', 'opacity-50');
-            startButton.classList.add('bg-green-500', 'hover:bg-green-600');
+            
 
             // Reiniciar el tiempo y los contadores
             tiempo = 60;
@@ -178,12 +152,7 @@ function reiniciarJuego() {
             document.getElementById('contador_movimientos').innerText = movimientos;
 
             // Cambiar el estado del juego a inactivo
-            juegoActivo = false;
-        } else {
-            // Si el usuario cancela, no detener el cronómetro, solo continuar
-            cronometro();
-        }
-    });
+            juegoActivo = true;
 }
 
 // Función para mostrar las instrucciones del juego
