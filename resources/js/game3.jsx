@@ -122,6 +122,8 @@ function hitObstacle(trineo, arbol) {
     text: `Puntuación final: ${score}`,
     icon: 'error',
     confirmButtonText: 'OK'
+  }).then(() => {
+    resetGameState();
   });
 }
 
@@ -144,26 +146,26 @@ function generarObstaculo(scene) {
   }
 }
 
-function reiniciarJuego() {
+// Function to reset the game state
+function resetGameState() {
   gameOver = false;
+  gameStarted = false;
   score = 0;
-  scoreText.setText('Puntos: 0');
+  scoreText.setText('Puntos: ' + score);
   regalos.clear(true, true);
   obstaculos.clear(true, true);
   trineo.clearTint();
   trineo.setPosition(400, 500);
-  this.physics.resume();
-  gameStarted = false; // Reset the gameStarted flag
-
-  // Clear existing timed events
   if (regalosEvent) regalosEvent.remove(false);
   if (obstaculosEvent) obstaculosEvent.remove(false);
+  document.getElementById('start-restart-btn').innerText = 'Iniciar Juego';
 }
 
-// Function to start the game
-function iniciarJuego() {
+// Function to start or restart the game
+function startOrRestartGame() {
   const scene = game.scene.scenes[0]; // Get the current scene
   gameStarted = true; // Set the gameStarted flag to true
+  gameOver = false;
   score = 0;
   scoreText.setText('Puntos: ' + score);
   regalos.clear(true, true);
@@ -171,6 +173,10 @@ function iniciarJuego() {
   trineo.clearTint();
   trineo.setPosition(400, 500);
   scene.physics.resume();
+
+  // Clear existing timed events
+  if (regalosEvent) regalosEvent.remove(false);
+  if (obstaculosEvent) obstaculosEvent.remove(false);
 
   // Configurar evento para generar regalos periódicamente
   regalosEvent = scene.time.addEvent({
@@ -187,11 +193,14 @@ function iniciarJuego() {
     callbackScope: scene,
     loop: true
   });
+
+  // Update button text
+  document.getElementById('start-restart-btn').innerText = 'Reiniciar Juego';
 }
 
 // Expose the functions to the global scope
-window.reiniciarJuego = reiniciarJuego;
-window.iniciarJuego = iniciarJuego;
+window.startOrRestartGame = startOrRestartGame;
+window.resetGameState = resetGameState;
 
 // Initialize the game when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {

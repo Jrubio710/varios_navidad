@@ -23,11 +23,8 @@
         </div>
      
         <div class="flex justify-center gap-4 mt-6">
-            <!-- Botón de reiniciar -->
-            <button onclick="reiniciarJuego()" id="restart-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition">Reiniciar Juego</button>
-            
-            <!-- Botón de inicio, que debe desaparecer al comenzar -->
-            <button onclick="iniciarJuego()" id="start-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Iniciar Juego</button>
+            <!-- Botón de inicio/reinicio -->
+            <button onclick="startOrRestartGame()" id="start-restart-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Iniciar Juego</button>
 
             <!-- Botón de instrucciones -->
             <button class="info bg-blue-100 hover:bg-blue-200 text-blue-800 font-medium py-2 px-4 rounded-lg transition flex items-center gap-2 shadow">
