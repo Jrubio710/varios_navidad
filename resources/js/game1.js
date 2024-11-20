@@ -105,7 +105,7 @@ function iniciarJuego() {
     aciertos = 0;
     movimientos = 0;
     puntos = 0;
-    tiempo = 5;
+    tiempo = 60;
 
     document.getElementById('contador_aciertos').innerText = aciertos;
     document.getElementById('contador_movimientos').innerText = movimientos;

@@ -33,6 +33,7 @@ let gameOver = false;
 let gameStarted = false; // Flag to control the game state
 let regalosEvent;
 let obstaculosEvent;
+let difficultyLevel = 1; // Initial difficulty level
 
 function preload() {
   console.log('Cargando imágenes...');
@@ -109,6 +110,11 @@ function collectGift(trineo, regalo) {
   regalo.disableBody(true, true);
   score += 10;
   scoreText.setText('Puntos: ' + score);
+
+  // Update difficulty every 100 points
+  if (score % 100 === 0) {
+    updateDifficulty();
+  }
 }
 
 function hitObstacle(trineo, arbol) {
@@ -142,8 +148,36 @@ function generarObstaculo(scene) {
     const y = Phaser.Math.Between(-200, -50);
     const arbol = scene.physics.add.sprite(x, y, 'arbol').setScale(0.2);
     arbol.setVelocityY(Phaser.Math.Between(100, 300)); // Set a random speed between 100 and 300
+    arbol.setSize(arbol.width * 0.5, arbol.height * 0.5); // Adjust the hitbox size
     obstaculos.add(arbol);
   }
+}
+
+// Function to update the difficulty
+function updateDifficulty() {
+  difficultyLevel += 1;
+
+  // Clear existing timed events
+  if (regalosEvent) regalosEvent.remove(false);
+  if (obstaculosEvent) obstaculosEvent.remove(false);
+
+  const scene = game.scene.scenes[0]; // Get the current scene
+
+  // Configurar evento para generar regalos periódicamente con mayor frecuencia
+  regalosEvent = scene.time.addEvent({
+    delay: Phaser.Math.Between(1000 / difficultyLevel, 3000 / difficultyLevel), // Reduce delay to increase difficulty
+    callback: () => generarRegalo(scene),
+    callbackScope: scene,
+    loop: true
+  });
+
+  // Configurar evento para generar obstáculos periódicamente con mayor frecuencia
+  obstaculosEvent = scene.time.addEvent({
+    delay: Phaser.Math.Between(1000 / difficultyLevel, 3000 / difficultyLevel), // Reduce delay to increase difficulty
+    callback: () => generarObstaculo(scene),
+    callbackScope: scene,
+    loop: true
+  });
 }
 
 // Function to reset the game state
@@ -159,6 +193,7 @@ function resetGameState() {
   if (regalosEvent) regalosEvent.remove(false);
   if (obstaculosEvent) obstaculosEvent.remove(false);
   document.getElementById('start-restart-btn').innerText = 'Iniciar Juego';
+  difficultyLevel = 1; // Reset difficulty level
 }
 
 // Function to start or restart the game
