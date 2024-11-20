@@ -142,7 +142,7 @@ function generarRegalo(scene) {
 }
 
 function generarObstaculo(scene) {
-  const maxObstaculos = 10; // Maximum number of obstacles allowed on the screen at the same time
+  const maxObstaculos = 20; // Maximum number of obstacles allowed on the screen at the same time
   if (obstaculos.countActive(true) < maxObstaculos) {
     const x = Phaser.Math.Between(50, scene.scale.width - 50);
     const y = Phaser.Math.Between(-200, -50);
