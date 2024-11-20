@@ -149,12 +149,14 @@ function generarRegalo(scene) {
 }
 
 function generarObstaculo(scene) {
-  //const maxObstaculos = 10; // ¿numero maximo?
-  const x = Phaser.Math.Between(50, scene.scale.width - 50);
-  const y = Phaser.Math.Between(-200, -50);
-  const arbol = scene.physics.add.sprite(x, y, 'arbol').setScale(0.2);
-  arbol.setVelocityY(Phaser.Math.Between(100, 300)); // Set a random speed between 100 and 300
-  obstaculos.add(arbol);
+  const maxObstaculos = 10; // Maximum number of obstacles allowed on the screen at the same time
+  if (obstaculos.countActive(true) < maxObstaculos) {
+    const x = Phaser.Math.Between(50, scene.scale.width - 50);
+    const y = Phaser.Math.Between(-200, -50);
+    const arbol = scene.physics.add.sprite(x, y, 'arbol').setScale(0.2);
+    arbol.setVelocityY(Phaser.Math.Between(100, 300)); // Set a random speed between 100 and 300
+    obstaculos.add(arbol);
+  }
 }
 
 function reiniciarJuego() {
@@ -167,5 +169,8 @@ function reiniciarJuego() {
   trineo.setPosition(400, 500);
   this.physics.resume();
 }
+
+// Expose the reiniciarJuego function to the global scope
+window.reiniciarJuego = reiniciarJuego;
 
 export default game;
