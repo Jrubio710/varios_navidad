@@ -1,5 +1,7 @@
 // Variables
 const gameID = 2;
+
+
 const tiempoRestante = document.getElementById('tiempo_restante');
 const colors = [
     "#39FF14", // Neon Green
@@ -58,7 +60,11 @@ function checkGrinch(num) {
         Swal.fire({
             icon: 'error',
             title: 'Oh no...',
-            text: '¡Sigue buscando!'
+            text: '¡Sigue buscando!',
+            imageUrl: '/img/grinch.gif',
+            imageWidth: 100,
+            imageHeight: 100,
+            imageAlt: 'Grinch'
         });
         movimientos++;
         const grinchElement = document.getElementById(grinchPosition);
