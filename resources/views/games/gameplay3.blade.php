@@ -24,7 +24,7 @@
      
         <div class="flex justify-center gap-4 mt-6">
             <!-- Botón de inicio/reinicio -->
-            <button onclick="startOrRestartGame()" id="start-restart-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Iniciar Juego</button>
+            <button id="start-restart-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Iniciar Juego</button>
 
             <!-- Botón de instrucciones -->
             <button class="info bg-blue-100 hover:bg-blue-200 text-blue-800 font-medium py-2 px-4 rounded-lg transition flex items-center gap-2 shadow">

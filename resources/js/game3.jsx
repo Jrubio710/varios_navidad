@@ -233,13 +233,48 @@ function startOrRestartGame() {
   document.getElementById('start-restart-btn').innerText = 'Reiniciar Juego';
 }
 
-// Expose the functions to the global scope
-window.startOrRestartGame = startOrRestartGame;
-window.resetGameState = resetGameState;
+// Function to show game instructions
+function showInstructions() {
+  Swal.fire({
+    title: '<h2 class="text-xl font-bold text-blue-600 mb-4">Instrucciones del Juego</h2>',
+    html: `
+      <div class="text-left">
+        <p class="text-gray-700 leading-relaxed mb-2">
+          <strong>Objetivo:</strong> Recoge tantos regalos como puedas mientras evitas los obstáculos.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-2">
+          Usa las teclas de flecha para mover el trineo.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-2">
+          Cada regalo recogido te da 10 puntos.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-2">
+          Si chocas con un obstáculo, el juego termina.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-2">
+          ¡Buena suerte y diviértete!
+        </p>
+      </div>`,
+    confirmButtonText: '¡Entendido, a jugar!',
+    confirmButtonColor: '#4CAF50',
+  });
+}
 
-// Initialize the game when the DOM is fully loaded
+// Add event listener for the "Indicaciones" button
 document.addEventListener('DOMContentLoaded', () => {
+  const infoButton = document.querySelector('.info');
+  if (infoButton) {
+    infoButton.addEventListener('click', showInstructions);
+  }
+
+  // Initialize the game
   game = new Phaser.Game(config);
+
+  // Add event listener for the "Iniciar Juego" button
+  const startButton = document.getElementById('start-restart-btn');
+  if (startButton) {
+    startButton.addEventListener('click', startOrRestartGame);
+  }
 });
 
 export default game;
