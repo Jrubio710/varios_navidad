@@ -61,7 +61,7 @@ function checkGrinch(num) {
             icon: 'error',
             title: 'Oh no...',
             text: '¡Sigue buscando!',
-            imageUrl: '/img/grinch.gif',
+            imageUrl: 'http://localhost/varios_navidad/public/img/grinch.gif',
             imageWidth: 100,
             imageHeight: 100,
             imageAlt: 'Grinch'
