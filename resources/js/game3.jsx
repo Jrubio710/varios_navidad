@@ -21,7 +21,7 @@ const config = {
   }
 };
 
-const game = new Phaser.Game(config);
+let game; // Declare the game variable here
 
 let trineo;
 let regalos;
@@ -30,6 +30,9 @@ let cursors;
 let score = 0;
 let scoreText;
 let gameOver = false;
+let gameStarted = false; // Flag to control the game state
+let regalosEvent;
+let obstaculosEvent;
 
 function preload() {
   console.log('Cargando imágenes...');
@@ -59,27 +62,6 @@ function create() {
   regalos = this.physics.add.group();
   obstaculos = this.physics.add.group();
 
-  // Configurar evento para generar regalos periódicamente
-  this.time.addEvent({
-    delay: Phaser.Math.Between(1000, 3000), // Intervalo aleatorio entre 1 y 3 segundos
-    callback: () => generarRegalo(this),
-    callbackScope: this,
-    loop: true
-  });
-
-  // Configurar evento para generar obstáculos periódicamente
-  this.time.addEvent({
-    delay: Phaser.Math.Between(1000, 3000), // Intervalo aleatorio entre 1 y 3 segundos
-    callback: () => generarObstaculo(this),
-    callbackScope: this,
-    loop: true
-  });
-
-  // Detectar colisión con regalos
-  this.physics.add.overlap(trineo, regalos, collectGift, null, this);
-  // Detectar colisión con obstáculos
-  this.physics.add.collider(trineo, obstaculos, hitObstacle, null, this);
-
   // Configuración de teclas para mover el trineo
   cursors = this.input.keyboard.createCursorKeys();
 
@@ -88,10 +70,15 @@ function create() {
 
   // Color de fondo de la cámara
   this.cameras.main.setBackgroundColor('#a8d0e6');
+
+  // Detectar colisión con regalos
+  this.physics.add.overlap(trineo, regalos, collectGift, null, this);
+  // Detectar colisión con obstáculos
+  this.physics.add.collider(trineo, obstaculos, hitObstacle, null, this);
 }
 
 function update() {
-  if (gameOver) return;
+  if (gameOver || !gameStarted) return; // Do not update if the game is over or not started
 
   if (cursors.left.isDown) {
     trineo.setVelocityX(-200);
@@ -134,9 +121,7 @@ function hitObstacle(trineo, arbol) {
     title: '¡Te has chocado!',
     text: `Puntuación final: ${score}`,
     icon: 'error',
-    confirmButtonText: 'Reiniciar'
-  }).then(() => {
-    reiniciarJuego();
+    confirmButtonText: 'OK'
   });
 }
 
@@ -168,9 +153,49 @@ function reiniciarJuego() {
   trineo.clearTint();
   trineo.setPosition(400, 500);
   this.physics.resume();
+  gameStarted = false; // Reset the gameStarted flag
+
+  // Clear existing timed events
+  if (regalosEvent) regalosEvent.remove(false);
+  if (obstaculosEvent) obstaculosEvent.remove(false);
 }
 
-// Expose the reiniciarJuego function to the global scope
+// Function to start the game
+function iniciarJuego() {
+  const scene = game.scene.scenes[0]; // Get the current scene
+  gameStarted = true; // Set the gameStarted flag to true
+  score = 0;
+  scoreText.setText('Puntos: ' + score);
+  regalos.clear(true, true);
+  obstaculos.clear(true, true);
+  trineo.clearTint();
+  trineo.setPosition(400, 500);
+  scene.physics.resume();
+
+  // Configurar evento para generar regalos periódicamente
+  regalosEvent = scene.time.addEvent({
+    delay: Phaser.Math.Between(1000, 3000), // Intervalo aleatorio entre 1 y 3 segundos
+    callback: () => generarRegalo(scene),
+    callbackScope: scene,
+    loop: true
+  });
+
+  // Configurar evento para generar obstáculos periódicamente
+  obstaculosEvent = scene.time.addEvent({
+    delay: Phaser.Math.Between(1000, 3000), // Intervalo aleatorio entre 1 y 3 segundos
+    callback: () => generarObstaculo(scene),
+    callbackScope: scene,
+    loop: true
+  });
+}
+
+// Expose the functions to the global scope
 window.reiniciarJuego = reiniciarJuego;
+window.iniciarJuego = iniciarJuego;
+
+// Initialize the game when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  game = new Phaser.Game(config);
+});
 
 export default game;
