@@ -14,6 +14,10 @@ let juegoActivo = false; // Estado del juego
 let bloqueado = false; // Para evitar clics mientras las cartas se comparan
 let contadorInterval; // Variable para almacenar el intervalo del cronómetro
 
+// Obtener el ID del juego desde la URL
+
+const gameId =  1;
+
 // Eventos
 startButton.addEventListener('click', iniciarJuego);
 restartButton.addEventListener('click', reiniciarJuego);
@@ -44,6 +48,38 @@ function calcularPuntosFinales() {
 
     // Mostrar la puntuación final
     document.getElementById('contador_puntos').innerText = puntos;
+
+    // Llamada a la API para guardar la puntuación en la base de datos
+    const urlGuardarPuntuacion = window.location.origin + '/varios_navidad/public/guardar-puntuacion';  // url absoluta
+    fetch(urlGuardarPuntuacion, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            score: puntos,
+            game_Id: gameId,
+            user_id: sessionStorage.getItem('user')
+        })
+    })
+    .then(response => {
+        return response.text();  // Cambiar a .text() para ver el cuerpo de la respuesta
+    })
+    .then(data => {
+        console.log('Respuesta del servidor:', data);  // Ver el cuerpo de la respuesta aquí
+        try {
+            const jsonResponse = JSON.parse(data);  // Intentar convertir la respuesta a JSON
+            console.log('Puntuación guardada correctamente:', jsonResponse);
+        } catch (e) {
+            console.error('Error al analizar JSON:', e);
+        }
+    })
+    .catch(error => {
+        console.error('Error al guardar la puntuación:', error);
+    });
+    
+    
 }
 
 // Función para iniciar el juego
@@ -69,7 +105,7 @@ function iniciarJuego() {
     aciertos = 0;
     movimientos = 0;
     puntos = 0;
-    tiempo = 60;
+    tiempo = 5;
 
     document.getElementById('contador_aciertos').innerText = aciertos;
     document.getElementById('contador_movimientos').innerText = movimientos;
@@ -124,10 +160,10 @@ function destapar(carta) {
                             </div>`,
                         icon: 'success',
                         confirmButtonText: '¡Jugar de nuevo!',
-                        confirmButtonColor: '#4CAF50',  // Color verde para el botón
+                        confirmButtonColor: '#4CAF50',
                         customClass: {
-                            title: 'font-bold text-3xl text-green-600', // Título más grande y llamativo
-                            htmlContainer: 'text-center', // Asegura que el contenido sea centrado
+                            title: 'font-bold text-3xl text-green-600',
+                            htmlContainer: 'text-center',
                         }
                     }).then(() => {
                         reiniciarJuego();
