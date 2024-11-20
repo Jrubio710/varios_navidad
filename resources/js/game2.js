@@ -230,19 +230,16 @@ function infoJuego() {
                 <p class="mb-2">¡Bienvenido al juego de encontrar al Grinch! 🎄</p>
                 <p class="mb-2">El objetivo del juego es encontrar al Grinch en el menor número de movimientos posibles.</p>
                 <p class="mb-2">Cada tarjeta tiene un color diferente, pero solo una de ellas es el Grinch.</p>
-                <p class="mb-2">El Grinch es tan patoso que va dejando rastro por donde pasa, esto podra ayudarte a encontrarlo.</p>
+                <p class="mb-2">El Grinch es tan patoso que va dejando rastro por donde pasa, esto podrá ayudarte a encontrarlo.</p>
                 <p class="mb-2">Haz clic en una tarjeta para revelar su color y descubrir si es el Grinch.</p>
-                <p class="mb-2">¡Buena suerte y diviértete!</p>
+                <p class="mb-2">¡Recuerda! El Grinch solo puede moverse como la torre en el ajedrez, es decir: arriba o abajo, y hacia ambos lados¡no en diagonal!</p>
+            </div>
         `,
         icon: 'info',
         confirmButtonText: '¡Entendido!',
         confirmButtonColor: '#4CAF50',
-    }).then(() => {
-        // Reanudar el cronómetro si el juego sigue activo
-        if (juegoActivo) {
-            cronometro(); // Reiniciar el cronómetro
-        }
     });
+    
 }
 
 function score(){
