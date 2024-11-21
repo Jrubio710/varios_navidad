@@ -49,36 +49,7 @@ function calcularPuntosFinales() {
     // Mostrar la puntuación final
     document.getElementById('contador_puntos').innerText = puntos;
 
-    // Llamada a la API para guardar la puntuación en la base de datos
-    const urlGuardarPuntuacion = window.location.origin + '/varios_navidad/public/guardar-puntuacion';  // url absoluta
-    fetch(urlGuardarPuntuacion, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({
-            score: puntos,
-            game_Id: gameId,
-            user_id: sessionStorage.getItem('user')
-        })
-    })
-    .then(response => {
-        return response.text();  // Cambiar a .text() para ver el cuerpo de la respuesta
-    })
-    .then(data => {
-        console.log('Respuesta del servidor:', data);  // Ver el cuerpo de la respuesta aquí
-        try {
-            const jsonResponse = JSON.parse(data);  // Intentar convertir la respuesta a JSON
-            console.log('Puntuación guardada correctamente:', jsonResponse);
-        } catch (e) {
-            console.error('Error al analizar JSON:', e);
-        }
-    })
-    .catch(error => {
-        console.error('Error al guardar la puntuación:', error);
-    });
-    
+    return puntos;
     
 }
 
@@ -105,7 +76,7 @@ function iniciarJuego() {
     aciertos = 0;
     movimientos = 0;
     puntos = 0;
-    tiempo = 60;
+    tiempo = 5;
 
     document.getElementById('contador_aciertos').innerText = aciertos;
     document.getElementById('contador_movimientos').innerText = movimientos;
