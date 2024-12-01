@@ -1,5 +1,5 @@
 <div>
-    <!-- Aside con juegos (oculto por defecto con -translate-x-full) -->
+    
     <div id="aside" class="bg-blue-500 text-white p-6 fixed top-20 left-0 w-80 h-full transform -translate-x-full transition-all duration-500 ease-in-out overflow-y-auto z-20 flex flex-col">
 
         <!-- Botón para ocultar el aside -->
@@ -18,7 +18,7 @@
             @endforeach
         </div>
 
-        <!-- Aseguramos que haya un espacio al fondo -->
+        
         <div class="h-20"></div>
     </div>
 
@@ -31,10 +31,10 @@
 <style>
     /* Clase para ocultar el scrollbar */
     .scrollbar-hide {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE y Edge */
+        scrollbar-width: none;
+        -ms-overflow-style: none; 
     }
     .scrollbar-hide::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
+        display: none;
     }
 </style>

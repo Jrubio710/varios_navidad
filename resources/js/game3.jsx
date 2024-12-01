@@ -21,7 +21,7 @@ const config = {
   }
 };
 
-let game; // Declare the game variable here
+let game; // Declaracion de la variable del juego
 
 let trineo;
 let regalos;
@@ -30,10 +30,10 @@ let cursors;
 let score = 0;
 let scoreText;
 let gameOver = false;
-let gameStarted = false; // Flag to control the game state
+let gameStarted = false; // Variable para controlar si el juego ha comenzado
 let regalosEvent;
 let obstaculosEvent;
-let difficultyLevel = 1; // Initial difficulty level
+let difficultyLevel = 1; // Nivel de dificultad inicial
 
 function preload() {
   console.log('Cargando imágenes...');
@@ -79,7 +79,7 @@ function create() {
 }
 
 function update() {
-  if (gameOver || !gameStarted) return; // Do not update if the game is over or not started
+  if (gameOver || !gameStarted) return; // No hacer nada si el juego ha terminado o no ha comenzado
 
   if (cursors.left.isDown) {
     trineo.setVelocityX(-200);
@@ -96,31 +96,31 @@ function update() {
 
   // Actualizar posición de regalos y obstáculos
   regalos.children.iterate(function (regalo) {
-    regalo.y += 2;
-    if (regalo.y > 600) regalo.y = 0;
+    regalo.y += 2;// Velocidad de caída de los regalos
+    if (regalo.y > 600) regalo.y = 0;// Reiniciar posición si se sale de la pantalla
   });
 
   obstaculos.children.iterate(function (arbol) {
-    arbol.y += 2;
-    if (arbol.y > 600) arbol.y = 0;
+    arbol.y += 2;// Velocidad de caída de los obstáculos
+    if (arbol.y > 600) arbol.y = 0;// Reiniciar posición si se sale de la pantalla
   });
 }
 
-function collectGift(trineo, regalo) {
+function collectGift(trineo, regalo) {// Función para recoger regalos
   regalo.disableBody(true, true);
   score += 10;
   scoreText.setText('Puntos: ' + score);
 
-  // Update difficulty every 100 points
-  if (score % 100 === 0) {
+  
+  if (score % 100 === 0) {// Aumentar la dificultad cada 100 puntos
     updateDifficulty();
   }
 }
 
-function hitObstacle(trineo, arbol) {
+function hitObstacle(trineo, arbol) {// Función para chocar con obstáculos
   gameOver = true;
   this.physics.pause();
-  trineo.setTint(0xff0000);
+  trineo.setTint(0xff0000);// Cambiar color del trineo al chocar
   scoreText.setText('¡Juego Terminado! Puntos: ' + score);
 
   Swal.fire({
@@ -134,9 +134,9 @@ function hitObstacle(trineo, arbol) {
 }
 
 function generarRegalo(scene) {
-  const x = Phaser.Math.Between(50, scene.scale.width - 50);
-  const y = Phaser.Math.Between(-200, -50);
-  const regalo = scene.physics.add.sprite(x, y, 'regalo').setScale(0.1);
+  const x = Phaser.Math.Between(50, scene.scale.width - 50);// Posición aleatoria en el eje X
+  const y = Phaser.Math.Between(-200, -50);// Posición aleatoria en el eje Y
+  const regalo = scene.physics.add.sprite(x, y, 'regalo').setScale(0.1);// Crear regalo
   regalo.setVelocityY(Phaser.Math.Between(50, 150));
   regalos.add(regalo);
 }
@@ -153,34 +153,34 @@ function generarObstaculo(scene) {
   }
 }
 
-// Function to update the difficulty
+// Function to update the difficulty level
 function updateDifficulty() {
   difficultyLevel += 1;
 
-  // Clear existing timed events
+  //limpiar eventos de tiempo existentes
   if (regalosEvent) regalosEvent.remove(false);
   if (obstaculosEvent) obstaculosEvent.remove(false);
 
-  const scene = game.scene.scenes[0]; // Get the current scene
+  const scene = game.scene.scenes[0]; //Tomar la escena actual
 
   // Configurar evento para generar regalos periódicamente con mayor frecuencia
   regalosEvent = scene.time.addEvent({
-    delay: Phaser.Math.Between(1000 / difficultyLevel, 3000 / difficultyLevel), // Reduce delay to increase difficulty
-    callback: () => generarRegalo(scene),
+    delay: Phaser.Math.Between(1000 / difficultyLevel, 3000 / difficultyLevel), //Aumentar la frecuencia de generación de regalos
+    callback: () => generarRegalo(scene),// Llamar a la función para generar regalos
     callbackScope: scene,
     loop: true
   });
 
   // Configurar evento para generar obstáculos periódicamente con mayor frecuencia
   obstaculosEvent = scene.time.addEvent({
-    delay: Phaser.Math.Between(1000 / difficultyLevel, 3000 / difficultyLevel), // Reduce delay to increase difficulty
-    callback: () => generarObstaculo(scene),
+    delay: Phaser.Math.Between(1000 / difficultyLevel, 3000 / difficultyLevel), //Aumentar la frecuencia de generación de obstáculos
+    callback: () => generarObstaculo(scene),// Llamar a la función para generar obstáculos
     callbackScope: scene,
     loop: true
   });
 }
 
-// Function to reset the game state
+//Funcion para reiniciar el estado del juego
 function resetGameState() {
   gameOver = false;
   gameStarted = false;
@@ -196,10 +196,10 @@ function resetGameState() {
   difficultyLevel = 1; // Reset difficulty level
 }
 
-// Function to start or restart the game
+// Funcion para iniciar o reiniciar el juego
 function startOrRestartGame() {
-  const scene = game.scene.scenes[0]; // Get the current scene
-  gameStarted = true; // Set the gameStarted flag to true
+  const scene = game.scene.scenes[0]; //Tomar la escena actual
+  gameStarted = true; // Cambiar el estado del juego a iniciado
   gameOver = false;
   score = 0;
   scoreText.setText('Puntos: ' + score);
@@ -209,7 +209,7 @@ function startOrRestartGame() {
   trineo.setPosition(400, 500);
   scene.physics.resume();
 
-  // Clear existing timed events
+  //Limpiar eventos de tiempo existentes
   if (regalosEvent) regalosEvent.remove(false);
   if (obstaculosEvent) obstaculosEvent.remove(false);
 
@@ -229,11 +229,11 @@ function startOrRestartGame() {
     loop: true
   });
 
-  // Update button text
+  // Cambiar el texto del botón a "Reiniciar Juego"
   document.getElementById('start-restart-btn').innerText = 'Reiniciar Juego';
 }
 
-// Function to show game instructions
+// Función para mostrar las instrucciones del juego
 function showInstructions() {
   Swal.fire({
     title: '<h2 class="text-xl font-bold text-blue-600 mb-4">Instrucciones del Juego</h2>',
@@ -260,17 +260,17 @@ function showInstructions() {
   });
 }
 
-// Add event listener for the "Indicaciones" button
+// Añadir evento para cargar el juego cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
   const infoButton = document.querySelector('.info');
   if (infoButton) {
     infoButton.addEventListener('click', showInstructions);
   }
 
-  // Initialize the game
+  // Inicializar el juego
   game = new Phaser.Game(config);
 
-  // Add event listener for the "Iniciar Juego" button
+  // Añadir evento al botón de inicio/reinicio
   const startButton = document.getElementById('start-restart-btn');
   if (startButton) {
     startButton.addEventListener('click', startOrRestartGame);

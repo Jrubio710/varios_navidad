@@ -5,14 +5,14 @@
 
 @section('game-content')
 <style>
-    /* Ocultar scrollbar en todos los navegadores */
+    
     .scrollbar-hide {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE y Edge */
+        scrollbar-width: none; 
+        -ms-overflow-style: none; 
     }
 
     .scrollbar-hide::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
+        display: none; 
     }
 
     /* Estilos para organizar el juego y el rastro a la derecha */
@@ -24,13 +24,13 @@
     }
 
     .game-board {
-        flex: 1; /* El tablero de juego toma el mayor espacio */
+        flex: 1; 
     }
 
     .rastro-container {
-    width: auto; /* Ajusta el tamaño al contenido */
-    min-width: 50px; /* Establece un ancho mínimo si es necesario */
-    flex-shrink: 0; /* Evita que el contenedor se reduzca */
+    width: auto; 
+    min-width: 50px; 
+    flex-shrink: 0; 
     display: inline-block; /* Esto permite que el contenedor tome el ancho adecuado basado en su contenido */
 }
 
@@ -43,9 +43,8 @@
     <main class="w-full max-w-4xl bg-white rounded-lg shadow-xl p-6 md:p-10 text-center flex flex-col items-center">
         <h1 class="text-3xl font-bold text-blue-800 mb-6">Encuentra al Grinch</h1>
 
-        <!-- Contenedor para el juego y el rastro -->
+        
         <div class="game-container">
-            <!-- Tablero de juego -->
             <section class="game-board">
                 <div class="flex flex-col items-center">
                     <table class="mx-auto">
@@ -66,10 +65,9 @@
                 </div>
             </section>
 
-            <!-- Rastro del juego a la derecha -->
+  
             <section class="rastro-container">
                 <div id="rastro" class="w-full h-64 bg-gray-100 rounded-lg shadow-inner overflow-y-auto p-2 space-y-2 scrollbar-hide">
-                    <!-- Aquí se irán agregando las bolas de colores -->
                 </div>
             </section>
         </div>

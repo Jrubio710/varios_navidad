@@ -15,7 +15,6 @@ let bloqueado = false; // Para evitar clics mientras las cartas se comparan
 let contadorInterval; // Variable para almacenar el intervalo del cronómetro
 
 // Obtener el ID del juego desde la URL
-
 const gameId =  1;
 
 // Eventos
@@ -49,8 +48,7 @@ function calcularPuntosFinales() {
     // Mostrar la puntuación final
     document.getElementById('contador_puntos').innerText = puntos;
 
-    return puntos;
-    
+    return puntos;  
 }
 
 // Función para iniciar el juego
@@ -76,7 +74,7 @@ function iniciarJuego() {
     aciertos = 0;
     movimientos = 0;
     puntos = 0;
-    tiempo = 5;
+    tiempo = 60;
 
     document.getElementById('contador_aciertos').innerText = aciertos;
     document.getElementById('contador_movimientos').innerText = movimientos;
