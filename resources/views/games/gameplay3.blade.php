@@ -23,7 +23,7 @@
         </div>
      
         <div class="flex justify-center gap-4 mt-6">
-            <
+            
             <button id="start-restart-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Iniciar Juego</button>
 
             
