@@ -21,9 +21,4 @@ Route::get('/games/{id}', [GameController::class, 'showGame'])->name('games.show
 // Ruta para jugar un juego específico
 Route::get('/games/gameplay/{id}', [GameController::class, 'play'])->name('games.play');
 
-// Ruta para el grinch
-Route::get('/games/grinch', [GrinchController::class, 'grinch'])->name('games.grinch');
-
-// Ruta para guardar la puntuación
-Route::post('/guardar-puntuacion', [ScoreController::class, 'guardarPuntuacion']);
 
