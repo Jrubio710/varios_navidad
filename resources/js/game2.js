@@ -105,7 +105,7 @@ function startGame() {
     });
     cronometro();
 
-    // Guarda la posición del Grinch en sessionStorage para que se pueda acceder desde `checkGrinch`
+    // Guarda la posición del Grinch en sessionStorage
     sessionStorage.setItem('grinchPosition', grinchPosition);
     console.log("Grinch está en la posición:", grinchPosition);
 }
