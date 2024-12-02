@@ -212,7 +212,7 @@ function cronometro() {
 
         // Agregar la bola al div #rastro
         rastroAside.appendChild(bola);
-        rastroAside.scrollTop = rastroAside.scrollHeight;  // Desplazar la barra de desplazamiento al final
+        rastroAside.scrollTop = rastroAside.scrollHeight; // Desplazar la barra de desplazamiento al final
     }
 
 

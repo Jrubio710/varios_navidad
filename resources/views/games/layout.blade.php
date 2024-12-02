@@ -20,11 +20,7 @@
             <x-aside id="aside" class="fixed top-20 left-0 w-80 h-full transform -translate-x-full transition-all duration-500 ease-in-out overflow-y-auto z-20 flex flex-col" />
         </div>
 
-      
         <div class="flex-grow w-full h-full p-0"> 
-           
-            <x-leaderboard />
-
             <x-game-container>
                 @yield('game-content')
             </x-game-container>
