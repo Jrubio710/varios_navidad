@@ -14,8 +14,7 @@ let juegoActivo = false; // Estado del juego
 let bloqueado = false; // Para evitar clics mientras las cartas se comparan
 let contadorInterval; // Variable para almacenar el intervalo del cronómetro
 
-// Obtener el ID del juego desde la URL
-const gameId =  1;
+const gameId = 1;
 
 // Eventos
 startButton.addEventListener('click', iniciarJuego);
